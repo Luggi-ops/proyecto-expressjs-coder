@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1670122531538,
+        "title": "producto prueba 1",
+        "description": "Este es un producto prueba",
+        "price": "200",
+        "thumbnail": "Sin imagen",
+        "code": "prod1",
+        "stock": 25
+    },
+    {
+        "id": 1670122649272,
+        "title": "producto prueba 2",
+        "description": "Este es un producto prueba",
+        "price": "300",
+        "thumbnail": "Sin imagen",
+        "code": "prod2",
+        "stock": 25
+    },
+    {
+        "id": 1670122531545,
+        "title": "producto modificado",
+        "description": "Este es un producto prueba",
+        "price": 10000,
+        "thumbnail": "Sin imagen",
+        "code": "prod3",
+        "stock": 25
+    }
+]
