@@ -42,7 +42,7 @@ export class ProductManager {
         if(findOne){
             return findOne;
         }else{
-            throw 'Not found!';
+            throw 'Product not found!';
         }
     }
 

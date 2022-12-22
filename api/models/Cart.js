@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { productManager } from './ProductManager.js';
 
 export class Cart {
     constructor(path){
@@ -15,16 +16,10 @@ export class Cart {
     }
 
     addCart(cart){
-        const exist = this.carts.find(c => c.id === cart.id);
-
-        if(exist){
-            throw 'Cart id exist!';
-        }else{
-            const uid = Date.now();
-            this.carts = [...this.cars, {id: uid,...cart}]
-            console.log("cart created")
-            this.saveData();
-        }
+        const uid = Date.now();
+        this.carts = [...this.carts, {id: uid,...cart}]
+        console.log("cart created")
+        this.saveData();
     }
 
     saveData(){
@@ -41,7 +36,7 @@ export class Cart {
         if(findOne){
             return findOne;
         }else{
-            throw 'Not found!';
+            throw 'Cart not found!';
         }
     }
 
@@ -68,6 +63,25 @@ export class Cart {
         this.carts = remove;
         this.saveData();
         console.log("removed cart")
+    }
+
+    addProduct(cartId, productId){
+        const index = this.carts.findIndex(c => c.id === Number(cartId));
+        
+        if(index === -1){
+            throw "Cart not exist"
+        }
+
+        const indexProduct = this.carts[index].products.findIndex(p => p.id === productId)
+
+        if(indexProduct === -1){
+            const product = productManager.getProductById(productId)
+            this.carts[index].products.push({id: product.code, quantity: 1})
+        }else{
+            this.carts[index].products[indexProduct].quantity += 1;
+        }
+
+        this.saveData();
     }
 }
 
