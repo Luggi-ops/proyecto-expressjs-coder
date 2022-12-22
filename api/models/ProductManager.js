@@ -19,10 +19,10 @@ export class ProductManager {
         const exist = this.products.find(prod => prod.code === product.code);
 
         if(exist){
-            console.log("existing product")
+            throw 'Product exist!';
         }else{
             const uid = Date.now();
-            this.products = [...this.products, {id: uid, ...product}]
+            this.products = [...this.products, {id: uid, status: true, ...product}]
             console.log("added product")
             this.saveData();
         }
@@ -42,15 +42,18 @@ export class ProductManager {
         if(findOne){
             return findOne;
         }else{
-            return {
-                msg: "Not found"
-            }
+            throw 'Not found!';
         }
     }
 
     updateProduct(id, body){
-        let product = this.products.find(prod => prod.id === id);
-        const productsUpdate = this.products.filter((product) => product.id !== id)
+        let product = this.products.find(prod => prod.code === id);
+
+        if(!product){
+            throw "Product not exist"
+        }
+
+        const productsUpdate = this.products.filter((product) => product.code !== id)
         product = {...product, ...body}
         this.products = [...productsUpdate, product]
         this.saveData();
@@ -58,11 +61,15 @@ export class ProductManager {
     }
 
     deleteProduct(id){
-        const remove = this.products.filter((product) => product.id !== id)
+        const product = this.products.find(prod => prod.code === id);
+        if(!product){
+            throw "Product not exist"
+        }
+        const remove = this.products.filter((product) => product.code !== id)
         this.products = remove;
         this.saveData();
         console.log("removed product")
     }
 }
 
-export const pm = new ProductManager("data/products.json");
+export const productManager = new ProductManager("data/products.json");
