@@ -24,7 +24,7 @@ const server = app.listen(PORT, () => {
     console.log(`Server UP running in http://localhost:${PORT}`)
 })
 
-const socketServer = new Server(server)
+export const socketServer = new Server(server)
 
 socketServer.on('connection', (socket) => {
     console.log('Nueva conexión', socket.id)

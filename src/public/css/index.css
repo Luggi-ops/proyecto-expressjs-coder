@@ -20,6 +20,7 @@ body{
     background-color: #fff;
     padding: 1.5rem;
     border-radius: .5rem;
+    width: 150px;
 }
 
 .card__title{

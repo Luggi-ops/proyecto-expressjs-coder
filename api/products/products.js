@@ -1,4 +1,5 @@
 import express from 'express';
+import { socketServer } from '../../app.js';
 import { productManager } from '../models/ProductManager.js';
 
 export const routerProductManager = express.Router();
@@ -43,7 +44,9 @@ routerProductManager.post("/products", async(req, res) => {
             })
         }
 
-        productManager.addProduct(req.body);
+        const product = productManager.addProduct(req.body);
+
+        socketServer.emit("addProduct", { product: product })
 
         res.json({
             ok: true,
@@ -100,6 +103,8 @@ routerProductManager.delete("/products/:pid", async (req, res) => {
         const { pid } = req.params;
         
         productManager.deleteProduct(pid)
+
+        socketServer.emit("deleteProduct", { pid: pid })
         
         res.json({
             ok: true,

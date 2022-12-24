@@ -22,9 +22,11 @@ export class ProductManager {
             throw 'Product exist!';
         }else{
             const uid = Date.now();
-            this.products = [...this.products, {id: uid, status: true, ...product}]
+            const newProduct = {id: uid, status: true, ...product}
+            this.products = [...this.products, newProduct]
             console.log("added product")
             this.saveData();
+            return newProduct
         }
     }
 
