@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .8rem;
+    background-color: #f3f4f6;
+}
+
+.containerCards{
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.card{
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+.card__title{
+    font-weight: 500;
+    font-size: 1rem;
+}
